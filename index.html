@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cheder Be'er Yeshaya — Transform Your Child Into a Ben Melech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --royal: #1B2A6B;
+      --royal-deep: #0F1A45;
+      --royal-light: #2C3E8F;
+      --gold: #E8A838;
+      --gold-bright: #F5C04A;
+      --teal: #1AAFA5;
+      --teal-light: #2CD4C8;
+      --coral: #E8664A;
+      --coral-soft: #F2856E;
+      --lavender: #8B7EC8;
+      --lavender-soft: #A99BDE;
+      --sky: #4AADE8;
+      --white: #FFFFFF;
+      --cream: #FFF9F0;
+      --ink: #1A1A2E;
+      --text: #3A3A52;
+      --text-light: #6B6B82;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--white); color: var(--ink); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.1rem 3rem; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.9); backdrop-filter: blur(20px); border-bottom: 1px solid rgba(27,42,107,0.08); transition: all 0.4s ease; }
+    nav.scrolled { padding: 0.75rem 3rem; box-shadow: 0 4px 30px rgba(27,42,107,0.1); }
+    .nav-logo { font-family: var(--serif); font-size: 1.4rem; font-weight: 700; color: var(--royal); }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--text); text-decoration: none; letter-spacing: 0.04em; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--royal); }
+    .nav-cta { background: linear-gradient(135deg, var(--royal), var(--royal-light)) !important; color: white !important; padding: 0.6rem 1.5rem !important; border-radius: 50px; transition: all 0.3s !important; box-shadow: 0 4px 15px rgba(27,42,107,0.25); }
+    .nav-cta:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(27,42,107,0.35) !important; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; }
+    .nav-hamburger span { width: 24px; height: 2px; background: var(--royal); }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; background: linear-gradient(160deg, var(--royal-deep) 0%, var(--royal) 40%, var(--royal-light) 100%); overflow: hidden; }
+    .hero-orb { position: absolute; border-radius: 50%; filter: blur(80px); animation: float 8s ease-in-out infinite; }
+    .hero-orb-1 { width: 500px; height: 500px; background: radial-gradient(circle, var(--gold-bright), transparent 70%); top: -10%; right: -5%; opacity: 0.25; }
+    .hero-orb-2 { width: 400px; height: 400px; background: radial-gradient(circle, var(--teal), transparent 70%); bottom: -10%; left: -5%; opacity: 0.2; animation-delay: -3s; }
+    .hero-orb-3 { width: 300px; height: 300px; background: radial-gradient(circle, var(--lavender), transparent 70%); top: 40%; left: 50%; opacity: 0.12; animation-delay: -5s; }
+    .hero-stars { position: absolute; inset: 0; background-image: radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,0.5), transparent), radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,0.4), transparent), radial-gradient(1.5px 1.5px at 50% 10%, rgba(255,255,255,0.6), transparent), radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.3), transparent), radial-gradient(1px 1px at 90% 40%, rgba(255,255,255,0.5), transparent), radial-gradient(1.5px 1.5px at 15% 85%, rgba(255,255,255,0.4), transparent), radial-gradient(1px 1px at 80% 15%, rgba(255,255,255,0.3), transparent); }
+    .hero-content { position: relative; z-index: 2; text-align: center; max-width: 850px; padding: 2rem; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 50px; padding: 0.5rem 1.25rem; margin-bottom: 2rem; opacity: 0; animation: fadeUp 0.8s 0.3s ease forwards; }
+    .hero-badge .dot { width: 8px; height: 8px; background: var(--teal-light); border-radius: 50%; animation: pulse 2s ease infinite; }
+    .hero-badge span { font-size: 0.78rem; font-weight: 500; color: rgba(255,255,255,0.8); letter-spacing: 0.08em; }
+    .hero h1 { font-family: var(--serif); font-size: clamp(3rem, 6.5vw, 5.2rem); font-weight: 700; line-height: 1.12; color: white; margin-bottom: 1.5rem; opacity: 0; animation: fadeUp 1s 0.5s ease forwards; }
+    .hero h1 em { font-style: italic; background: linear-gradient(135deg, var(--gold-bright), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: 1.15rem; font-weight: 300; color: rgba(255,255,255,0.7); line-height: 1.7; max-width: 540px; margin: 0 auto 2.5rem; opacity: 0; animation: fadeUp 1s 0.7s ease forwards; }
+    .hero-buttons { display: flex; gap: 1rem; justify-content: center; opacity: 0; animation: fadeUp 1s 0.9s ease forwards; }
+    .hero-scroll { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.5rem; opacity: 0; animation: fadeIn 1s 1.5s ease forwards; }
+    .hero-scroll span { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent); animation: scrollPulse 2s ease infinite; }
+
+    /* BUTTONS */
+    .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.95rem 2.2rem; font-family: var(--sans); font-size: 0.88rem; font-weight: 500; letter-spacing: 0.03em; text-decoration: none; border: none; cursor: pointer; border-radius: 50px; transition: all 0.35s ease; }
+    .btn-gold { background: linear-gradient(135deg, var(--gold-bright), var(--gold)); color: var(--royal-deep); box-shadow: 0 4px 20px rgba(232,168,56,0.35); }
+    .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(232,168,56,0.45); }
+    .btn-ghost { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.25); }
+    .btn-ghost:hover { background: rgba(255,255,255,0.18); }
+    .btn-royal { background: linear-gradient(135deg, var(--royal), var(--royal-light)); color: white; box-shadow: 0 4px 20px rgba(27,42,107,0.3); }
+    .btn-royal:hover { transform: translateY(-3px); box-shadow: 0 8px 30px rgba(27,42,107,0.4); }
+
+    /* STATS */
+    .stats-bar { background: var(--white); padding: 3rem; border-bottom: 1px solid rgba(27,42,107,0.06); }
+    .stats-inner { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-around; gap: 2rem; }
+    .stat { text-align: center; }
+    .stat-num { font-family: var(--serif); font-size: 2.8rem; font-weight: 700; background: linear-gradient(135deg, var(--royal), var(--teal)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .stat-label { font-size: 0.8rem; font-weight: 500; color: var(--text-light); letter-spacing: 0.05em; margin-top: 0.25rem; }
+
+    /* SECTION LABEL */
+    .section-label { display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.25rem; }
+    .section-label::before { content: ''; width: 24px; height: 3px; border-radius: 2px; }
+
+    /* MISSION */
+    .mission { padding: 8rem 3rem; background: var(--white); position: relative; overflow: hidden; }
+    .mission::after { content: ''; position: absolute; top: 0; right: -200px; width: 500px; height: 500px; background: radial-gradient(circle, rgba(26,175,165,0.06), transparent 70%); border-radius: 50%; }
+    .mission-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .mission .section-label { color: var(--teal); }
+    .mission .section-label::before { background: var(--teal); }
+    .mission h2 { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; }
+    .mission h2 .highlight { position: relative; display: inline; }
+    .mission h2 .highlight::after { content: ''; position: absolute; bottom: 2px; left: 0; right: 0; height: 8px; background: linear-gradient(135deg, var(--gold-bright), var(--teal-light)); opacity: 0.25; border-radius: 4px; }
+    .mission p { font-size: 1.05rem; line-height: 1.85; color: var(--text); font-weight: 300; }
+    .mission-visual { position: relative; aspect-ratio: 4/5; border-radius: 20px; overflow: hidden; background: linear-gradient(135deg, var(--royal), var(--teal)); display: flex; align-items: center; justify-content: center; box-shadow: 0 20px 60px rgba(27,42,107,0.15); }
+    .mission-visual::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 70%, rgba(232,168,56,0.3), transparent 50%), radial-gradient(circle at 70% 30%, rgba(26,175,165,0.3), transparent 50%); }
+    .mission-visual .placeholder-text { font-family: var(--serif); font-size: 1.3rem; color: rgba(255,255,255,0.6); font-style: italic; z-index: 1; }
+
+    /* PILLARS */
+    .pillars { padding: 7rem 3rem; background: var(--cream); position: relative; overflow: hidden; }
+    .pillars::before { content: ''; position: absolute; top: -200px; left: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(139,126,200,0.08), transparent 60%); border-radius: 50%; }
+    .pillars-header { text-align: center; max-width: 600px; margin: 0 auto 4.5rem; }
+    .pillars .section-label { color: var(--lavender); }
+    .pillars .section-label::before { background: var(--lavender); }
+    .pillars-header h2 { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 700; }
+    .pillars-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .pillar-card { background: var(--white); padding: 2.25rem 2rem; border-radius: 16px; transition: all 0.4s ease; border: 1px solid rgba(27,42,107,0.06); }
+    .pillar-card:hover { transform: translateY(-6px); box-shadow: 0 16px 50px rgba(27,42,107,0.1); }
+    .pillar-icon { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 1.25rem; color: white; }
+    .pillar-card:nth-child(1) .pillar-icon { background: linear-gradient(135deg, var(--royal), var(--sky)); }
+    .pillar-card:nth-child(2) .pillar-icon { background: linear-gradient(135deg, var(--teal), var(--teal-light)); }
+    .pillar-card:nth-child(3) .pillar-icon { background: linear-gradient(135deg, var(--gold), var(--gold-bright)); }
+    .pillar-card:nth-child(4) .pillar-icon { background: linear-gradient(135deg, var(--coral), var(--coral-soft)); }
+    .pillar-card:nth-child(5) .pillar-icon { background: linear-gradient(135deg, var(--lavender), var(--lavender-soft)); }
+    .pillar-card:nth-child(6) .pillar-icon { background: linear-gradient(135deg, var(--royal-light), var(--teal)); }
+    .pillar-card h3 { font-family: var(--serif); font-size: 1.25rem; font-weight: 600; margin-bottom: 0.65rem; }
+    .pillar-card p { font-size: 0.9rem; line-height: 1.7; color: var(--text-light); font-weight: 300; }
+
+    /* REB SHAYALA */
+    .shayala { padding: 8rem 3rem; background: linear-gradient(160deg, var(--royal-deep) 0%, var(--royal) 50%, #2A1B6B 100%); color: white; position: relative; overflow: hidden; }
+    .shayala-glow { position: absolute; border-radius: 50%; filter: blur(100px); }
+    .shayala-glow-1 { width: 400px; height: 400px; background: var(--gold); opacity: 0.08; top: -100px; right: -100px; }
+    .shayala-glow-2 { width: 300px; height: 300px; background: var(--teal); opacity: 0.06; bottom: -100px; left: 20%; }
+    .shayala-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; z-index: 1; }
+    .shayala-visual { aspect-ratio: 1; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; display: flex; align-items: center; justify-content: center; position: relative; }
+    .shayala-visual::before { content: ''; position: absolute; inset: 0; border-radius: 20px; background: linear-gradient(135deg, rgba(232,168,56,0.08), rgba(26,175,165,0.08)); }
+    .shayala-visual .placeholder-text { font-family: var(--serif); font-size: 1.2rem; color: rgba(255,255,255,0.35); font-style: italic; }
+    .shayala .section-label { color: var(--gold-bright); }
+    .shayala .section-label::before { background: var(--gold-bright); }
+    .shayala h2 { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 700; line-height: 1.2; margin-bottom: 1.5rem; }
+    .shayala h2 em { font-style: italic; color: var(--gold-bright); }
+    .shayala-text p { font-size: 1.02rem; line-height: 1.85; color: rgba(255,255,255,0.65); font-weight: 300; margin-bottom: 1rem; }
+    .shayala-text p strong { color: white; font-weight: 500; }
+    .shayala-quote { margin-top: 2rem; padding: 1.25rem 1.5rem; background: rgba(232,168,56,0.08); border-left: 3px solid var(--gold-bright); border-radius: 0 12px 12px 0; }
+    .shayala-quote p { font-family: var(--serif); font-size: 1.15rem; font-style: italic; color: var(--gold-bright) !important; }
+
+    /* LEADERSHIP */
+    .leadership { padding: 7rem 3rem; background: var(--white); }
+    .leadership-inner { max-width: 1100px; margin: 0 auto; }
+    .leadership-header { text-align: center; margin-bottom: 4rem; }
+    .leadership .section-label { color: var(--coral); }
+    .leadership .section-label::before { background: var(--coral); }
+    .leadership-header h2 { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 700; }
+    .leadership-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+    .leader-group { padding: 2rem 1.5rem; background: var(--cream); border-radius: 16px; border: 1px solid rgba(27,42,107,0.05); transition: all 0.3s ease; }
+    .leader-group:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(27,42,107,0.06); }
+    .leader-group h4 { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 2px solid; }
+    .leader-group:nth-child(1) h4 { color: var(--royal); border-color: var(--royal); }
+    .leader-group:nth-child(2) h4 { color: var(--teal); border-color: var(--teal); }
+    .leader-group:nth-child(3) h4 { color: var(--lavender); border-color: var(--lavender); }
+    .leader-group:nth-child(4) h4 { color: var(--coral); border-color: var(--coral); }
+    .leader-group ul { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .leader-group li { font-size: 0.9rem; color: var(--text); font-weight: 400; }
+    .leader-group li .role { display: block; font-size: 0.75rem; color: var(--text-light); font-weight: 300; margin-top: 0.1rem; }
+
+    /* CONTACT */
+    .contact { padding: 7rem 3rem; background: var(--cream); position: relative; overflow: hidden; }
+    .contact::before { content: ''; position: absolute; bottom: -200px; right: -200px; width: 600px; height: 600px; background: radial-gradient(circle, rgba(232,168,56,0.08), transparent 60%); border-radius: 50%; }
+    .contact-inner { max-width: 1050px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; position: relative; z-index: 1; }
+    .contact .section-label { color: var(--sky); }
+    .contact .section-label::before { background: var(--sky); }
+    .contact-text h2 { font-family: var(--serif); font-size: clamp(2rem, 3vw, 2.5rem); font-weight: 700; line-height: 1.2; margin-bottom: 2.5rem; }
+    .contact-text h2 em { font-style: italic; background: linear-gradient(135deg, var(--gold), var(--coral)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+    .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .contact-icon { width: 42px; height: 42px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1rem; color: white; }
+    .contact-item:nth-child(1) .contact-icon { background: linear-gradient(135deg, var(--royal), var(--sky)); }
+    .contact-item:nth-child(2) .contact-icon { background: linear-gradient(135deg, var(--teal), var(--teal-light)); }
+    .contact-item:nth-child(3) .contact-icon { background: linear-gradient(135deg, var(--gold), var(--gold-bright)); }
+    .contact-item-text .label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.25rem; }
+    .contact-item-text p { font-size: 0.95rem; color: var(--text); line-height: 1.5; }
+    .contact-item-text a { color: var(--text); text-decoration: none; transition: color 0.3s; }
+    .contact-item-text a:hover { color: var(--royal); }
+    .contact-form-card { background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 40px rgba(27,42,107,0.08); border: 1px solid rgba(27,42,107,0.05); }
+    .contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+    .form-group label { display: block; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-light); margin-bottom: 0.5rem; }
+    .form-group input, .form-group textarea { width: 100%; padding: 0.85rem 1rem; font-family: var(--sans); font-size: 0.9rem; font-weight: 400; color: var(--ink); background: var(--cream); border: 2px solid transparent; border-radius: 12px; outline: none; transition: all 0.3s; }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--royal); background: white; box-shadow: 0 0 0 4px rgba(27,42,107,0.08); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    /* FOOTER */
+    footer { padding: 2.5rem 3rem; background: var(--royal-deep); color: rgba(255,255,255,0.5); display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+    footer .footer-logo { font-family: var(--serif); font-size: 1.15rem; color: white; font-weight: 600; }
+    footer .footer-logo span { color: var(--gold-bright); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes scrollPulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; } }
+    @keyframes float { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(20px, -20px); } }
+    @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(0.8); } }
+    .reveal { opacity: 0; transform: translateY(35px); transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+    .reveal-delay-5 { transition-delay: 0.5s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      .mission-inner, .shayala-inner, .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .pillars-grid { grid-template-columns: 1fr 1fr; }
+      .leadership-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-inner { flex-wrap: wrap; }
+      .stat { flex: 1 1 40%; }
+      .shayala-visual { order: -1; aspect-ratio: 16/9; }
+    }
+    @media (max-width: 600px) {
+      .pillars-grid { grid-template-columns: 1fr; }
+      .leadership-grid { grid-template-columns: 1fr; }
+      .hero-buttons { flex-direction: column; align-items: center; }
+      footer { flex-direction: column; gap: 0.75rem; text-align: center; }
+      .stats-inner { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <nav id="nav">
+    <div class="nav-logo">Be'er <span>Yeshaya</span></div>
+    <div class="nav-links">
+      <a href="#mission">Mission</a>
+      <a href="#pillars">Our Approach</a>
+      <a href="#shayala">Reb Shayala</a>
+      <a href="#leadership">Leadership</a>
+      <a href="#contact" class="nav-cta">Apply Now</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <div class="hero-stars"></div>
+    <div class="hero-content">
+      <div class="hero-badge"><div class="dot"></div><span>Now Enrolling · Suffern, NY</span></div>
+      <h1>Transform your child<br>into a <em>Ben Melech</em></h1>
+      <p class="hero-sub">A forward-thinking Cheder built on timeless values. Where every child discovers the life they are meant to lead.</p>
+      <div class="hero-buttons">
+        <a href="#contact" class="btn btn-gold">Begin the Journey →</a>
+        <a href="#mission" class="btn btn-ghost">Discover Our Mission</a>
+      </div>
+    </div>
+    <div class="hero-scroll"><span>Explore</span><div class="scroll-line"></div></div>
+  </section>
+
+  <section class="stats-bar">
+    <div class="stats-inner">
+      <div class="stat reveal"><div class="stat-num">6</div><div class="stat-label">Core Pillars</div></div>
+      <div class="stat reveal reveal-delay-1"><div class="stat-num">1</div><div class="stat-label">Mission: Every Child</div></div>
+      <div class="stat reveal reveal-delay-2"><div class="stat-num">∞</div><div class="stat-label">Unconditional Love</div></div>
+      <div class="stat reveal reveal-delay-3"><div class="stat-num">100%</div><div class="stat-label">Family Partnership</div></div>
+    </div>
+  </section>
+
+  <section class="mission" id="mission">
+    <div class="mission-inner">
+      <div class="mission-text reveal">
+        <p class="section-label">Our Mission</p>
+        <h2>Don't teach children to <span class="highlight">learn</span>.<br>Teach them to <span class="highlight">live</span>.</h2>
+        <p>Cheder Be'er Yeshaya is on a mission to connect each child to the life they are meant to lead. We believe that real chinuch goes far beyond the classroom — it shapes how a child sees the world, interacts with others, and ultimately fulfills their unique purpose.</p>
+      </div>
+      <div class="mission-visual reveal reveal-delay-2">
+        <div class="placeholder-text">[ Image Placeholder ]</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pillars" id="pillars">
+    <div class="pillars-header reveal">
+      <p class="section-label">Our Approach</p>
+      <h2>How we kindle their light</h2>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar-card reveal"><div class="pillar-icon">🤝</div><h3>Chinuch is a Partnership</h3><p>True education begins at home and extends to the classroom. We build meaningful relationships with parents for a unified experience.</p></div>
+      <div class="pillar-card reveal reveal-delay-1"><div class="pillar-icon">🎓</div><h3>Higher Education Matters</h3><p>Elevating Torah learning with academic rigor and intellectual depth, preparing children for a life of meaningful growth.</p></div>
+      <div class="pillar-card reveal reveal-delay-2"><div class="pillar-icon">✨</div><h3>Yiddishkeit is an Experience</h3><p>We immerse children in the beauty, warmth, and joy of a Torah life through experiential learning and genuine connection.</p></div>
+      <div class="pillar-card reveal reveal-delay-3"><div class="pillar-icon">🌍</div><h3>Real-Life Readiness</h3><p>Beyond textbooks, we equip children with practical skills, emotional intelligence, and confidence to navigate the world.</p></div>
+      <div class="pillar-card reveal reveal-delay-4"><div class="pillar-icon">📖</div><h3>Derech Halimud Begins Here</h3><p>We instill a lifelong methodology of learning — teaching children not just what to think, but how to think and discover.</p></div>
+      <div class="pillar-card reveal reveal-delay-5"><div class="pillar-icon">💜</div><h3>Middos: Lev and Nefesh</h3><p>Character development runs deep. We cultivate middos that come from the heart and soul — authentic, internalized values.</p></div>
+    </div>
+  </section>
+
+  <section class="shayala" id="shayala">
+    <div class="shayala-glow shayala-glow-1"></div>
+    <div class="shayala-glow shayala-glow-2"></div>
+    <div class="shayala-inner">
+      <div class="shayala-visual reveal"><div class="placeholder-text">[ Image Placeholder ]</div></div>
+      <div class="shayala-text reveal reveal-delay-2">
+        <p class="section-label">Reb Shayala</p>
+        <h2>The belief in every <em>Yid</em>.</h2>
+        <p>Reb Shayala embodies unconditional positivity and love. He meets you where you are — because <em>Chol</em> is also <em>Kodesh</em>.</p>
+        <p>He lives his life in the mundane. He ladles hot soup to common guests. He helps Yidden find a livelihood. He inquires about the little things in everyday life. <strong>He sees every Yid for who he is.</strong></p>
+        <div class="shayala-quote"><p>Reb Shayala is in the Cheder.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="leadership" id="leadership">
+    <div class="leadership-inner">
+      <div class="leadership-header reveal">
+        <p class="section-label">Leadership</p>
+        <h2>Guided by wisdom and vision</h2>
+      </div>
+      <div class="leadership-grid">
+        <div class="leader-group reveal"><h4>Rabbinical Advisory</h4><ul><li>Rav Heller <em>Shlita</em></li><li>Rav Schlesinger <em>Shlita</em></li></ul></div>
+        <div class="leader-group reveal reveal-delay-1"><h4>Board of Directors</h4><ul><li>Yanky Karmel</li><li>Chakie Rosenfeld</li><li>Ari Flohr</li></ul></div>
+        <div class="leader-group reveal reveal-delay-2"><h4>Vaad Hachinuch</h4><ul><li>Rabbi Yosef Mendel Huss</li><li>Rabbi Shraga Gold</li><li>Rabbi Yoel Shimon Kestenbaum</li></ul></div>
+        <div class="leader-group reveal reveal-delay-3"><h4>Cheder Leadership</h4><ul><li>Rabbi Shmelke Dachner<span class="role">Menahel</span></li><li>R' Yanky Klein<span class="role">Director of Development</span></li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="contact-inner">
+      <div class="contact-text reveal">
+        <p class="section-label">We're Listening</p>
+        <h2>Let's transform your child into a <em>Ben Melech</em>.</h2>
+        <div class="contact-info">
+          <div class="contact-item"><div class="contact-icon">⌂</div><div class="contact-item-text"><div class="label">Visit</div><p>Cheder Be'er Yeshaya<br>4 Cambell Avenue<br>Suffern, NY 10901</p></div></div>
+          <div class="contact-item"><div class="contact-icon">✆</div><div class="contact-item-text"><div class="label">Call</div><p><a href="tel:8456946015">845.694.6015</a></p></div></div>
+          <div class="contact-item"><div class="contact-icon">✉</div><div class="contact-item-text"><div class="label">Email</div><p><a href="mailto:admin@chederby.org">admin@chederby.org</a></p></div></div>
+        </div>
+      </div>
+      <div class="contact-form-card reveal reveal-delay-2">
+        <div class="contact-form">
+          <div class="form-group"><label for="name">Name</label><input type="text" id="name" placeholder="Your name"></div>
+          <div class="form-group"><label for="email">Email</label><input type="email" id="email" placeholder="your@email.com"></div>
+          <div class="form-group"><label for="message">Message</label><textarea id="message" placeholder="How can we help?"></textarea></div>
+          <button class="btn btn-royal" type="button">Submit Message →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-logo">Cheder Be'er <span>Yeshaya</span></div>
+    <div>© Cheder Be'er Yeshaya · All Rights Reserved</div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); observer.unobserve(entry.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+    reveals.forEach(el => observer.observe(el));
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => { e.preventDefault(); const t = document.querySelector(a.getAttribute('href')); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+    });
+  </script>
+</body>
+</html>
